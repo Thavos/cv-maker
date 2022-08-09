@@ -1,24 +1,25 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { createContext, useEffect, useState } from "react";
+import "./App.css";
+import { Section } from "./components/Section";
 
 function App() {
+  const [educations, setEducations] = useState([]);
+
+  function reorderArray(oldID: number, newID: number, type: number) {
+    console.log(educations.length);
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="main">
+      <div className="input-side">
+        <Section
+          type={0}
+          data={educations}
+          setData={setEducations}
+          reorderData={reorderArray}
+        />
+      </div>
+      <div className="output-side"></div>
     </div>
   );
 }

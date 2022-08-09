@@ -1,0 +1,38 @@
+form {
+  display: flex;
+  flex-wrap: wrap;
+
+  background-color: #292c3b;
+  padding: 1rem;
+  margin: 0.5rem;
+
+  color: #7078a1;
+}
+
+label {
+  flex: 1;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.label-date {
+  flex: 0.5 !important;
+}
+
+input {
+  background-color: #9da7e0;
+  border: none;
+  margin-right: 1rem;
+}
+
+textarea {
+  flex: 1;
+  min-height: 10rem;
+  resize: none;
+  background-color: #9da7e0;
+}
+
+.label-desc {
+  margin-top: 1rem;
+}
