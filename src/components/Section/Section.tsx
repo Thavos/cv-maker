@@ -2,28 +2,44 @@ import React, { FC, useState } from "react";
 import { JsxElement } from "typescript";
 import { Education } from "../Education";
 
-interface Props {
-  type: number;
-  data: any;
-  setData: any;
-  reorderData: (oldID: number, newID: number, type: number) => void;
-}
-
 enum compType {
   "Education" = 0,
 }
 
 const compMap = [Education];
 
-export const Section: FC<Props> = ({ type, data, setData, reorderData }) => {
+export const Section: FC<Section> = ({ type, data, setData, reorderData }) => {
   const C = compMap[type];
 
   return (
     <>
-      {data}
+      {data.map((e: any, index: number) => (
+        <C
+          key={index}
+          data={e.data}
+          id={index}
+          setData={setData}
+          reorderData={reorderData}
+        />
+      ))}
       <button
         onClick={() =>
-          setData([...data, <C myID={data.length} reorderData={reorderData} />])
+          setData([
+            ...data,
+            {
+              data: {
+                school: "",
+                degree: "",
+                sDate: "",
+                eDate: "",
+                city: "",
+                desc: "",
+              },
+              id: data.length,
+              setData: setData,
+              reorderData: reorderData,
+            },
+          ])
         }
       >
         Add Education

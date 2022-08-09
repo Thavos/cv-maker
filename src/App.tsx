@@ -3,10 +3,18 @@ import "./App.css";
 import { Section } from "./components/Section";
 
 function App() {
-  const [educations, setEducations] = useState([]);
+  const [educations, setEducations] = useState<Education[]>([]);
 
   function reorderArray(oldID: number, newID: number, type: number) {
-    console.log(educations.length);
+    if (newID < 0 || newID > educations.length - 1) return;
+
+    console.log(educations);
+
+    let newArr = [...educations];
+    newArr[oldID] = educations[newID];
+    newArr[newID] = educations[oldID];
+
+    setEducations(newArr);
   }
 
   return (

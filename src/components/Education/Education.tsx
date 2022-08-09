@@ -2,18 +2,18 @@ import React, { FC, useState } from "react";
 import styles from "./Education.module.css";
 import classNames from "classnames";
 
-interface Props {
-  myID: number;
-  reorderData: (oldID: number, newID: number, type: number) => void;
-}
-
-export const Education: FC<Props> = ({ myID, reorderData }) => {
-  const [school, setSchool] = useState<string>("");
-  const [degree, setDegree] = useState<string>("");
-  const [sDate, setSDate] = useState<string>();
-  const [eDate, setEDate] = useState<string>();
-  const [city, setCity] = useState<string>("");
-  const [description, setDescription] = useState<string>("");
+export const Education: FC<Education> = ({
+  data,
+  id,
+  setData,
+  reorderData,
+}) => {
+  const [school, setSchool] = useState<string>(data.school || "");
+  const [degree, setDegree] = useState<string>(data.degree || "");
+  const [sDate, setSDate] = useState<string>(data.sDate || "");
+  const [eDate, setEDate] = useState<string>(data.eDate || "");
+  const [city, setCity] = useState<string>(data.city || "");
+  const [desc, setDesc] = useState<string>(data.desc || "");
 
   const handleChange = (event: any, setState: any) => {
     setState(event.target.value);
@@ -26,9 +26,13 @@ export const Education: FC<Props> = ({ myID, reorderData }) => {
         <input
           type="text"
           className={classNames(styles.input)}
-          value={school}
+          value={data.school}
           onChange={(e) => {
-            handleChange(e, setSchool);
+            setData((c: any) => {
+              let newArr = [...c];
+              newArr[id].data.school = e.target.value;
+              return newArr;
+            });
           }}
         />
       </label>
@@ -85,9 +89,9 @@ export const Education: FC<Props> = ({ myID, reorderData }) => {
         Description
         <textarea
           className={classNames(styles.textarea)}
-          value={description}
+          value={desc}
           onChange={(e) => {
-            handleChange(e, setDescription);
+            handleChange(e, setDesc);
           }}
         />
       </label>
@@ -95,7 +99,7 @@ export const Education: FC<Props> = ({ myID, reorderData }) => {
       <button
         type="button"
         onClick={() => {
-          reorderData(myID, myID - 1, 0);
+          reorderData(id, id - 1, 0);
         }}
       >
         Move Up
@@ -103,10 +107,33 @@ export const Education: FC<Props> = ({ myID, reorderData }) => {
       <button
         type="button"
         onClick={() => {
-          reorderData(myID, myID + 1, 0);
+          reorderData(id, id + 1, 0);
         }}
       >
         Move Down
+      </button>
+
+      <button
+        type="button"
+        onClick={() => {
+          setData((c: any) => {
+            let newData = [...c];
+            newData[id] = {
+              data: {
+                school: school,
+                degree: degree,
+                sDate: sDate,
+                eDate: eDate,
+                city: city,
+                desc: desc,
+              },
+              ...newData[id],
+            };
+            return newData;
+          });
+        }}
+      >
+        Save
       </button>
     </form>
   );
