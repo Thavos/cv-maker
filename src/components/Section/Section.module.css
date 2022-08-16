@@ -1,0 +1,52 @@
+.section {
+  background-color: #292c3b;
+  color: #7078a1;
+
+  padding: 0.8rem;
+  margin: 0.8rem;
+
+  border-radius: 1rem;
+}
+
+.section-name {
+  margin: 0rem;
+  margin-bottom: 1rem;
+}
+
+.btn-container {
+  display: flex;
+}
+
+.btn {
+  flex: 1;
+  flex-direction: row;
+
+  max-width: 12rem;
+  border: none;
+  border-radius: 1rem;
+  padding: 1rem;
+}
+
+.add-btn {
+  background-color: rgb(39, 175, 112);
+  color: #fff;
+}
+
+.move-btn {
+  background-color: #394791;
+  color: #fff;
+}
+
+.move-btn-left {
+  border-top-right-radius: 0em;
+  border-bottom-right-radius: 0rem;
+  margin-left: auto;
+  margin-right: 0rem;
+}
+
+.move-btn-right {
+  border-top-left-radius: 0em;
+  border-bottom-left-radius: 0rem;
+  margin-right: 0rem;
+  margin-left: 0.35rem;
+}

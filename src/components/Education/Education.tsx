@@ -8,133 +8,171 @@ export const Education: FC<Education> = ({
   setData,
   reorderData,
 }) => {
-  const [school, setSchool] = useState<string>(data.school || "");
-  const [degree, setDegree] = useState<string>(data.degree || "");
-  const [sDate, setSDate] = useState<string>(data.sDate || "");
-  const [eDate, setEDate] = useState<string>(data.eDate || "");
-  const [city, setCity] = useState<string>(data.city || "");
-  const [desc, setDesc] = useState<string>(data.desc || "");
+  const [toggle, setToggle] = useState<boolean>(true);
 
-  const handleChange = (event: any, setState: any) => {
-    setState(event.target.value);
+  const handleChange = (event: any, label: string) => {
+    setData((c: any) => {
+      let newArr = [...c];
+      if (label === "toggle") {
+        newArr[id].data[label] = !toggle;
+      } else {
+        newArr[id].data[label] = event.target.value;
+      }
+      return newArr;
+    });
+
+    setToggle(!toggle);
+  };
+
+  const handleDelete = () => {
+    setData((c: any) =>
+      c.filter((e: any) => {
+        return e.data !== data;
+      })
+    );
   };
 
   return (
-    <form className={classNames(styles.form)}>
-      <label className={classNames(styles.label)}>
-        School
-        <input
-          type="text"
-          className={classNames(styles.input)}
-          value={data.school}
-          onChange={(e) => {
-            setData((c: any) => {
-              let newArr = [...c];
-              newArr[id].data.school = e.target.value;
-              return newArr;
-            });
-          }}
-        />
-      </label>
+    <>
+      <form className={classNames(styles.form)}>
+        <div className={styles["education-label"]}>
+          <div>{data.school || "School name"}</div>
+          <div>{data.degree || "Degree"}</div>
+          <div className={styles["education-label-right"]}>
+            {data.eDate || "End date"}
+          </div>
+          <button
+            type="button"
+            className={classNames(
+              styles["btn"],
+              styles["btn-edit"],
+              styles["btn-left"]
+            )}
+            onClick={(e) => {
+              handleChange(e, "toggle");
+            }}
+          >
+            Edit
+          </button>
+          <button
+            type="button"
+            className={classNames(
+              styles["btn"],
+              styles["btn-delete"],
+              styles["btn-right"]
+            )}
+            onClick={() => {
+              handleDelete();
+            }}
+          >
+            Delete
+          </button>
+        </div>
 
-      <label className={classNames(styles.label)}>
-        Degree
-        <input
-          type="text"
-          className={classNames(styles.input)}
-          value={degree}
-          onChange={(e) => {
-            handleChange(e, setDegree);
-          }}
-        />
-      </label>
+        {data.toggle && (
+          <>
+            <div className={styles.break} />
 
-      <label className={classNames(styles.label, styles["label-date"])}>
-        Start date
-        <input
-          type="date"
-          className={classNames(styles.input)}
-          value={sDate}
-          onChange={(e) => {
-            handleChange(e, setSDate);
-          }}
-        />
-      </label>
+            <label className={classNames(styles.label)}>
+              School
+              <input
+                type="text"
+                className={classNames(styles.input)}
+                value={data.school || ""}
+                onChange={(e) => {
+                  handleChange(e, "school");
+                }}
+              />
+            </label>
 
-      <label className={classNames(styles.label, styles["label-date"])}>
-        End date
-        <input
-          type="date"
-          className={classNames(styles.input)}
-          value={eDate}
-          onChange={(e) => {
-            handleChange(e, setEDate);
-          }}
-        />
-      </label>
+            <label className={classNames(styles.label)}>
+              Degree
+              <input
+                type="text"
+                className={classNames(styles.input)}
+                value={data.degree || ""}
+                onChange={(e) => {
+                  handleChange(e, "degree");
+                }}
+              />
+            </label>
 
-      <label className={classNames(styles.label)}>
-        City
-        <input
-          type="text"
-          className={classNames(styles.input)}
-          value={city}
-          onChange={(e) => {
-            handleChange(e, setCity);
-          }}
-        />
-      </label>
+            <div className={classNames(styles["break"])} />
 
-      <label className={classNames(styles.label, styles["label-desc"])}>
-        Description
-        <textarea
-          className={classNames(styles.textarea)}
-          value={desc}
-          onChange={(e) => {
-            handleChange(e, setDesc);
-          }}
-        />
-      </label>
+            <label className={classNames(styles.label, styles["label-date"])}>
+              Start
+              <input
+                type="date"
+                className={classNames(styles.input)}
+                value={data.sDate || ""}
+                onChange={(e) => {
+                  handleChange(e, "sDate");
+                }}
+              />
+            </label>
 
-      <button
-        type="button"
-        onClick={() => {
-          reorderData(id, id - 1, 0);
-        }}
-      >
-        Move Up
-      </button>
-      <button
-        type="button"
-        onClick={() => {
-          reorderData(id, id + 1, 0);
-        }}
-      >
-        Move Down
-      </button>
+            <label className={classNames(styles.label, styles["label-date"])}>
+              End
+              <input
+                type="date"
+                className={classNames(styles.input)}
+                value={data.eDate || ""}
+                onChange={(e) => {
+                  handleChange(e, "eDate");
+                }}
+              />
+            </label>
 
-      <button
-        type="button"
-        onClick={() => {
-          setData((c: any) => {
-            let newData = [...c];
-            newData[id] = {
-              data: {
-                school: school,
-                degree: degree,
-                sDate: sDate,
-                eDate: eDate,
-                city: city,
-                desc: desc,
-              },
-              ...newData[id],
-            };
-            return newData;
-          });
-        }}
-      >
-        Save
-      </button>
-    </form>
+            <label className={classNames(styles.label)}>
+              City
+              <input
+                type="text"
+                className={classNames(styles.input)}
+                value={data.city || ""}
+                onChange={(e) => {
+                  handleChange(e, "city");
+                }}
+              />
+            </label>
+
+            <div className={classNames(styles["break"])} />
+
+            <label className={classNames(styles.label, styles["label-desc"])}>
+              Description
+              <textarea
+                className={classNames(styles.textarea)}
+                value={data.desc || ""}
+                onChange={(e) => {
+                  handleChange(e, "desc");
+                }}
+              />
+            </label>
+          </>
+        )}
+
+        <div className={styles.break} />
+
+        <div className={styles["btn-holder"]}>
+          <button
+            className={classNames(styles["btn"], styles["btn-left"])}
+            type="button"
+            onClick={() => {
+              reorderData(id, id - 1, 0);
+            }}
+          >
+            Move Up
+          </button>
+          <button
+            className={classNames(styles["btn"], styles["btn-right"])}
+            type="button"
+            onClick={() => {
+              reorderData(id, id + 1, 0);
+            }}
+          >
+            Move Down
+          </button>
+        </div>
+      </form>
+    </>
   );
 };

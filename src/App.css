@@ -2,6 +2,42 @@ body {
   background-color: #3b3f54;
 }
 
+input {
+  background-color: #9da7e0;
+  border: none;
+  margin-right: 1rem;
+}
+
+textarea {
+  flex: 1;
+  min-height: 10rem;
+  resize: none;
+  background-color: #9da7e0;
+}
+
+form {
+  display: flex;
+  flex-wrap: wrap;
+
+  margin: 1rem;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+  padding: 1.2rem;
+
+  border-radius: 1rem;
+
+  background-color: #1f222e;
+}
+
+label {
+  flex: 1;
+
+  display: flex;
+  flex-direction: column;
+
+  margin-top: 0.7rem;
+}
+
 .main {
   display: flex;
 }
@@ -12,4 +48,9 @@ body {
 
 .output-side {
   flex: 1;
+}
+
+.break {
+  flex-basis: 100%;
+  height: 0;
 }

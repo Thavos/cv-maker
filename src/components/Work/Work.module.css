@@ -23,6 +23,17 @@
   margin-top: 1rem;
 }
 
+.btn-left {
+  border-bottom-left-radius: 1rem;
+  border-top-left-radius: 1rem;
+  margin-right: 0.2rem;
+}
+
+.btn-right {
+  border-bottom-right-radius: 1rem;
+  border-top-right-radius: 1rem;
+}
+
 .btn-edit {
   min-width: 0rem !important;
   max-width: 4rem;
@@ -37,28 +48,17 @@
   background-color: #364183;
 }
 
-.btn-left {
-  border-bottom-left-radius: 1rem;
-  border-top-left-radius: 1rem;
-  margin-right: 0.2rem;
-}
-
-.btn-right {
-  border-bottom-right-radius: 1rem;
-  border-top-right-radius: 1rem;
-}
-
-.education-label {
+.work-label {
   display: flex;
   flex-direction: row;
   width: 100%;
 }
 
-.education-label > * {
+.work-label > * {
   flex: 1;
 }
 
-.education-label-right {
+.work-label-right {
   margin-right: 1rem;
   text-align: right;
 }
